@@ -1,6 +1,5 @@
-function g = gistBlock(c1,numScaleBands,numSimpleFilters)
+function g = gistBlock(tmpGist,numScaleBands,numSimpleFilters)
 % 
-
 
 N = 1;
 w = 4;
@@ -14,7 +13,7 @@ g = zeros([W*Nfilters N]);
 k=0;
 for iBand = 1:numScaleBands
     for iFilt = 1:numSimpleFilters 
-        ig = c1{iBand}(:,:,iFilt);
+        ig = tmpGist{iBand}(:,:,iFilt);
         v = downN(ig, w);
         g(k+1:k+W,:) = reshape(v, [W N]);
         k = k + W;

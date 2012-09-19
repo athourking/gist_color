@@ -151,6 +151,8 @@ for iBand = 1:numScaleBands
 end
 
 
+
+
 g = gistBlock(c1,numScaleBands,numSimpleFilters);
 
 
