@@ -6,7 +6,7 @@ Oliva, A., Torralba, A.: Modeling the shape of the scene : A holistic representa
 of the spatial envelope.IJCV, 2001.
 
 demoRelease  : grayscale Gist
-demoSoRelease: SOGist (For most cases, two orientations of SO is sufficient due to the weekly oriented property)
+demoSoRelease: SOGist
 demoDoRelease: DOGist
 
 
