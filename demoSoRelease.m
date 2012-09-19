@@ -42,7 +42,7 @@ fprintf(1,'Initializing color gabor filters -- full set...');
 [fSiz,~,cfilters,c1OL,numOrients] = init_color_gabor(rot, RF_siz, Div,numChannels,numPhases);
 fprintf(1,'done\n');
 
-Nfeatures = length(rot)*length(RF_siz)*numberBlocks^2*numChannels;
+Nfeatures = length(rot)*(length(c1ScaleSS)-1)*numberBlocks^2*numChannels*numPhases;
 
 
 
@@ -59,6 +59,12 @@ for n = 1:Nscenes
         c1ScaleSS,numPhases,numChannels);
 end
 
+
+
+outDir = sprintf('../results');
+if ~exist(outDir,'dir')
+    mkdir(outDir);
+end
 
 save(fullfile(outDir,sprintf('F.mat')) ,'F','-v7.3');
 
