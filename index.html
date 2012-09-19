@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>ColorGIST by pencilzhang</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>ColorGIST</h1>
+        <p>a biologically inspired color scene categorization</p>
+
+        <p class="view"><a href="https://github.com/pencilzhang/gist_color">View the Project on GitHub <small>pencilzhang/gist_color</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/pencilzhang/gist_color/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/pencilzhang/gist_color/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/pencilzhang/gist_color">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1> a biologically inspired grayscale/SO/DO GIST model for scene categorization</h1>
+
+<p>GIST model was original proposed in:
+Oliva, A., Torralba, A.: Modeling the shape of the scene : A holistic representation
+of the spatial envelope.IJCV, 2001.</p>
+
+<p>demoRelease  : grayscale Gist
+demoSoRelease: SOGist 
+demoDoRelease: DOGist</p>
+
+<p>Filtering in the original algorithm was done in the frequency domain. We thus had to design
+filters in the spatial domain that would approximate the original system as best as possible. 
+In practice, we found that the Gabor filter parameters used in the
+HMAX model with six scales (7x7 to 39x39 in steps of 6 pixels), two phases
+(0 and 90 degrees), and eight orientations (0-180 degrees in steps of 22.5 degrees) led to results
+comparable to those obtained with the grayscale Gist model.</p>
+
+<p>If you use this code, please cite:
+Zhang J., Barhomi Y., and Serre T. A new biologically inspired color image descriptor.In: ECCV, Florence, Italy, October 2012. </p>
+
+<p>For comments or questions, please contact Jun Zhang (<a href="mailto:zhangjun1126@gmail.com">zhangjun1126@gmail.com</a>)</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/pencilzhang">pencilzhang</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
