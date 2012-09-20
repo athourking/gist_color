@@ -140,15 +140,15 @@ for iBand = 1:numScaleBands
     end
 end
 
-%   (3) subsample
-for iBand = 1:numScaleBands 
-    sSS=ceil(c1SpaceSS(iBand)/c1OL);
-    clear T;
-    for iFilt = 1:numSimpleFilters 
-        T(:,:,iFilt) = c1{iBand}(1:sSS:end,1:sSS:end,iFilt); 
-    end
-    c1{iBand} = T;
-end
+% %   (3) subsample
+% for iBand = 1:numScaleBands 
+%     sSS=ceil(c1SpaceSS(iBand)/c1OL);
+%     clear T;
+%     for iFilt = 1:numSimpleFilters 
+%         T(:,:,iFilt) = c1{iBand}(1:sSS:end,1:sSS:end,iFilt); 
+%     end
+%     c1{iBand} = T;
+% end
 
 
 
