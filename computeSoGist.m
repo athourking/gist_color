@@ -92,21 +92,21 @@ for iBand = 1:numScaleBands
 end
 
 %
-%   (3) subsample
-for iBand = 1:numScaleBands
-    sSS=ceil(c1SpaceSS(iBand)/c1OL);
-    clear T;
-    
-    for jj=1:numChannels
-        for iFilt = 1:numSimpleFilters
-            for iPhase = 1:numPhases
-                T(:,:,jj,iFilt,iPhase) = c1{iBand}(1:sSS:end,1:sSS:end,jj,iFilt,iPhase);
-            end
-        end
-    end
-    c1{iBand} = T;
-    
-end
+% %   (3) subsample
+% for iBand = 1:numScaleBands
+%     sSS=ceil(c1SpaceSS(iBand)/c1OL);
+%     clear T;
+%     
+%     for jj=1:numChannels
+%         for iFilt = 1:numSimpleFilters
+%             for iPhase = 1:numPhases
+%                 T(:,:,jj,iFilt,iPhase) = c1{iBand}(1:sSS:end,1:sSS:end,jj,iFilt,iPhase);
+%             end
+%         end
+%     end
+%     c1{iBand} = T;
+%     
+% end
 
 
 

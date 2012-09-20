@@ -103,9 +103,9 @@ for iPhase = 1:numPhases
  
                     s1(:,:,iBand,iScale,iFilt,iPhase) = abs(conv2padded(stim,sqfilter{iUFilterIndex}{iPhase}));
                     
-                    if(~INCLUDEBORDERS)
-                        s1(:,:,iBand,iScale,iFilt,iPhase) = removeborders(s1(:,:,iBand,iScale,iFilt,iPhase),fSiz(iUFilterIndex));
-                    end
+%                     if(~INCLUDEBORDERS)
+%                         s1(:,:,iBand,iScale,iFilt,iPhase) = removeborders(s1(:,:,iBand,iScale,iFilt,iPhase),fSiz(iUFilterIndex));
+%                     end
                     s1(:,:,iBand,iScale,iFilt,iPhase) = im2double(s1(:,:,iBand,iScale,iFilt,iPhase)) ./ s1Norm{fSiz(iUFilterIndex)};
                 end
                 
@@ -140,7 +140,7 @@ for iBand = 1:numScaleBands
     end
 end
 
-% %   (3) subsample
+%   (3) subsample
 % for iBand = 1:numScaleBands 
 %     sSS=ceil(c1SpaceSS(iBand)/c1OL);
 %     clear T;

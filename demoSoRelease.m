@@ -1,8 +1,6 @@
 % Demo, scene recognition
 %
-% This script illustrates Single-Opponent color Gist features extraction which is modified
-% from Antonio Torralba's MATLAB implementation while using Thomas Serre's
-% Gabor in the space domain.
+% This script illustrates Single-Opponent color Gist features
 %
 
 
@@ -10,7 +8,7 @@
 %% ---------------------------------------------------------------
 %                                Parameters
 % -------------------------------------------------------------------------
-imgDir = '..\images\spatial_envelope_256x256_static_8outdoorcategories';
+imgDir = '/gpfs/home/tserre/work/jzhang/database/Gist/spatial_envelope_256x256_static_8outdoorcategories';
 categories = {'tallbuilding','insidecity','street','highway','coast','opencountry','mountain','forest'};
 imageSize = 256; 
 numberBlocks = 4;
@@ -23,7 +21,7 @@ numChannels = 8;
 rot =  0:22.5:22.5*7;
 c1ScaleSS = 1:2:8;
 RF_siz    = 7:6:39;
-c1SpaceSS = 8:6:20;
+c1SpaceSS = 8:4:20;
 div = 4:-.05:3.2;
 Div       = div(1:3:end);
 
@@ -63,11 +61,11 @@ end
 
 
 
-outDir = sprintf('../results');
+outDir = sprintf('../results/0920');
 if ~exist(outDir,'dir')
     mkdir(outDir);
 end
 
-save(fullfile(outDir,sprintf('F.mat')) ,'F','-v7.3');
-
+save(fullfile(outDir,sprintf('Fso_nosample2.mat')) ,'F','-v7.3');
+exit
 %
