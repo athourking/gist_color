@@ -8,7 +8,7 @@
 %% ---------------------------------------------------------------
 %                                Parameters
 % -------------------------------------------------------------------------
-imgDir = '...\images\spatial_envelope_256x256_static_8outdoorcategories';
+imgDir = '..\images\spatial_envelope_256x256_static_8outdoorcategories';
 categories = {'tallbuilding','insidecity','street','highway','coast','opencountry','mountain','forest'};
 imageSize = 256; 
 numberBlocks = 4;
@@ -56,7 +56,7 @@ for n = 1:Nscenes
     
     output = prefilt(double(img), fc_prefilt);
     F(n,:) = computeSoGist(output,cfilters, fSiz, c1SpaceSS, ...
-        c1ScaleSS,numPhases,numChannels);
+        c1ScaleSS,c1OL,numPhases,numChannels);
 end
 
 

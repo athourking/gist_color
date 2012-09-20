@@ -8,7 +8,7 @@
 %% ---------------------------------------------------------------
 %                                Parameters
 % -------------------------------------------------------------------------
-imgDir = 'C:\cognitive science\scene perception\gist\Modeling the shape of the scene a holistic representation of the spatial envelope\images\spatial_envelope_256x256_static_8outdoorcategories';
+imgDir = '..\images\spatial_envelope_256x256_static_8outdoorcategories';
 categories = {'tallbuilding','insidecity','street','highway','coast','opencountry','mountain','forest'};
 imageSize = 256; 
 numberBlocks = 4;

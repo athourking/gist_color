@@ -7,7 +7,7 @@
 %% ---------------------------------------------------------------
 %                                Parameters
 % -------------------------------------------------------------------------
-imgDir = '...\images\spatial_envelope_256x256_static_8outdoorcategories';
+imgDir = '..\images\spatial_envelope_256x256_static_8outdoorcategories';
 categories = {'tallbuilding','insidecity','street','highway','coast','opencountry','mountain','forest'};
 imageSize = 256; 
 numberBlocks = 4;
