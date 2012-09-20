@@ -1,7 +1,9 @@
 % Demo, scene recognition
 %
 % This script illustrates the gist feature extraction which is modified
-% from Torralba's MATLAB implementation.
+% from Antonio Torralba's MATLAB implementation while using Thomas Serre's
+% Gabor in the space domain.
+
 
 
 %% ---------------------------------------------------------------

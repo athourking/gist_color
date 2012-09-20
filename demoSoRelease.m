@@ -1,6 +1,8 @@
 % Demo, scene recognition
 %
-% This script illustrates Single-Opponent color Gist features
+% This script illustrates Single-Opponent color Gist features extraction which is modified
+% from Antonio Torralba's MATLAB implementation while using Thomas Serre's
+% Gabor in the space domain.
 %
 
 
