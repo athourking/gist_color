@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#PBS -N sceneRec2
+#PBS -N sceneRecS1
 #PBS -l nodes=1:ppn=1
-#PBS -l walltime=3:00:00
+#PBS -l walltime=1:00:00
 #PBS -j oe
 #PBS -m ae
 ##PBS -o /gpfs/data/tserre/jzhang/ColorGist/gist_color
@@ -12,7 +12,7 @@ cd /gpfs/data/tserre/jzhang/ColorGist/gist_color
 
 # Specify the executable ...
 
-matlab-threaded -nodisplay -nosplash <demoRelease.m>  g2.out
+matlab-threaded -nodisplay -nosplash <jun_gist_s1gray.m>  gs.out
 # matlab-threaded -nodisplay -nosplash -r "demoRelease"
 wait
 

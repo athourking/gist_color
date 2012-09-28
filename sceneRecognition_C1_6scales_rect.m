@@ -11,17 +11,9 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % % Parameters
-addpath('/users/jz7/data/recent/ColorGist/gist/svm571');
-addpath('/users/jz7/data/recent/ColorGist/gist/gaussian_opponent_model_for_colorTuning');
-addpath('/users/jz7/data/recent/Tuning/The Steerable Pyramid/matlabPyrTools/matlabPyrTools');
-
-% Parameters
-HOMEIMAGES = '/users/jz7/data/recent/ColorGist/images/spatial_envelope_256x256_static_8outdoorcategories';
-HOMEANNOTATIONS = '/users/jz7/data/recent/ColorGist/annotations/spatial_envelope_256x256_static_8outdoorcategories';
-% DB2 = LMdatabase(HOMEANNOTATIONS);
+imgDir = 'C:\cognitive science\scene perception\gist\Modeling the shape of the scene a holistic representation of the spatial envelope\images\spatial_envelope_256x256_static_8outdoorcategories';
 categories = {'tallbuilding','insidecity','street','highway','coast','opencountry','mountain','forest'};
-% HOMEIMAGES = 'E:\paper and code\Modeling the shape of the scene a holistic representation of the spatial envelope\images2'
-% categories = {'aisle','boston','car','face','kitchen','meeting','office','static_indoor'};
+
 imageSize = 256; 
 % imageSize = 140; 
 % orientationsPerScale = [8 8 8 8];
@@ -103,8 +95,7 @@ end
 train = [];
 for c = 1:Nclasses
     j = find(C==c);%�ҳ���c�ೡ����ͼ����
-    t = randperm(length(j));%��j��ͼ���������
-    train = [train; j(t(1:NtrainingPerClass))];%ȡǰ100��ͼ����Ϊtraining set
+    t = randperm(length(j));%��j��ͼ���������?    train = [train; j(t(1:NtrainingPerClass))];%ȡǰ100��ͼ����Ϊtraining set
 end %�õ�800��ͼ���training set��ÿ��100��
 test = setdiff(1:Nscenes, train)';%
 
@@ -117,8 +108,7 @@ for c = 1:Nclasses
     netc = svm(Nfeatures, 'rbf', 0.003, 100);
     netc = svmtrain(netc, F(train,:), 2*(C(train)==c)-1, [], 1);
 
-    [Y, scores(c,:)] = svmfwd(netc, F(test,:)); %��c���Ӧ�Ĳ��Լ�Ԥ�����ͷ���
-    
+    [Y, scores(c,:)] = svmfwd(netc, F(test,:)); %��c���Ӧ�Ĳ��Լ�Ԥ�����ͷ���?    
 end
 for k = 1:length(test)
     [foo, ctest_hat(k)] = max(scores(:,k));

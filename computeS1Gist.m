@@ -1,4 +1,4 @@
-function g = computeGist(stim, filters, fSiz, c1SpaceSS, c1ScaleSS, c1OL,numPhases,INCLUDEBORDERS)
+function g = computeS1Gist(stim, filters, fSiz, c1ScaleSS, numPhases,INCLUDEBORDERS)
 
 % Modified from the matlab implementation of the C1 code of Thomas Serre.
 %
@@ -43,7 +43,7 @@ function g = computeGist(stim, filters, fSiz, c1SpaceSS, c1ScaleSS, c1OL,numPhas
 USECONV2 = 1; %should be faster if 1
 
 USE_NORMXCORR_INSTEAD = 0;
-if(nargin < 8)
+if(nargin < 7)
     INCLUDEBORDERS = 0;
 end
 numScaleBands=length(c1ScaleSS)-1;  % convention: last element in c1ScaleSS is max index + 1
@@ -83,8 +83,6 @@ end
 %% --------------------------------------------------------------
 %                           Calculate S1 
 % ------------------------------------------------------------------------
-ss1 = 0;
-
 for iPhase = 1:numPhases
     iUFilterIndex = 0;
     
@@ -103,9 +101,9 @@ for iPhase = 1:numPhases
  
                     s1(:,:,iBand,iScale,iFilt,iPhase) = abs(conv2padded(stim,sqfilter{iUFilterIndex}{iPhase}));
                     
-%                     if(~INCLUDEBORDERS)
-%                         s1(:,:,iBand,iScale,iFilt,iPhase) = removeborders(s1(:,:,iBand,iScale,iFilt,iPhase),fSiz(iUFilterIndex));
-%                     end
+                    if(~INCLUDEBORDERS)
+                        s1(:,:,iBand,iScale,iFilt,iPhase) = removeborders(s1(:,:,iBand,iScale,iFilt,iPhase),fSiz(iUFilterIndex));
+                    end
                     s1(:,:,iBand,iScale,iFilt,iPhase) = im2double(s1(:,:,iBand,iScale,iFilt,iPhase)) ./ s1Norm{fSiz(iUFilterIndex)};
                 end
                 
@@ -113,15 +111,13 @@ for iPhase = 1:numPhases
         end
     end
     
-    ss1 = ss1 + s1(:,:,:,:,:,iPhase) ./ numPhases;
+%     ss1 = ss1 + s1(:,:,:,:,:,iPhase) ./ numPhases;
 end
 
+s1_energy = sqrt(s1(:,:,:,:,:,1).^2 + s1(:,:,:,:,:,2).^2);
 
 
-
-
-
-g = gistBlock(c1,numScaleBands,numSimpleFilters);
+g = gistS1Block(s1_energy,numScaleBands,2,numSimpleFilters);
 
 
 

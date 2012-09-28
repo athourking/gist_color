@@ -34,7 +34,7 @@ scenes = {scenes(:).name};
 Nscenes = length(scenes);
 % 
 [fSiz,filters,c1OL,numSimpleFilters] = init_gabor_phase(rot, RF_siz, Div,numPhases);
-Nfeatures = length(rot)*(length(c1ScaleSS)-1)*numberBlocks^2;
+Nfeatures = length(rot)*length(RF_siz)*numberBlocks^2;
 
 
 F = zeros([Nscenes Nfeatures]);
@@ -48,7 +48,7 @@ for n = 1:Nscenes
     end
     
     output = prefilt(img, fc_prefilt);
-    F(n,:) = computeGist(output, filters, fSiz, c1SpaceSS, c1ScaleSS, c1OL,numPhases);
+    F(n,:) = computeS1Gist(output, filters, fSiz,  c1ScaleSS, numPhases);
 
 end
 
@@ -58,6 +58,6 @@ if ~exist(outDir,'dir')
     mkdir(outDir);
 end
 
-save(fullfile(outDir,sprintf('Fs1.mat')) ,'F','-v7.3');
+save(fullfile(outDir,sprintf('Fenergy.mat')) ,'F','-v7.3');
 
 %

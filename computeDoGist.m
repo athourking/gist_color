@@ -1,4 +1,4 @@
-function g = computeDoGist(stim, gfilters, cfilters,  fSiz, c1ScaleSS,c1OL, numPhases, numChannels)
+function g = computeDoGist(stim, gfilters, cfilters,  fSiz, c1ScaleSS, numPhases, numChannels)
 
 % USECONV2 = 1; %should be faster if 1
 
@@ -7,7 +7,7 @@ sigma = 0.225;
 
 
 
-if(nargin < 9)
+if(nargin < 8)
     INCLUDEBORDERS = 0;
 end
 numScaleBands=length(c1ScaleSS)-1;  % convention: last element in c1ScaleSS is max index + 1

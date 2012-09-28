@@ -49,8 +49,8 @@ USE_NORMXCORR_INSTEAD = 0;
 if(nargin < 8)
     INCLUDEBORDERS = 0;
 end
-numScaleBands=length(c1ScaleSS)-1;  % convention: last element in c1ScaleSS is max index + 1 �߶ȴ�ĸ���
-numScales = c1ScaleSS(end)-1; %�߶ȵĸ���
+numScaleBands=length(c1ScaleSS)-1;  % convention: last element in c1ScaleSS is max index + 1 �߶ȴ�ĸ���?numScales = c1ScaleSS(end)-1; %�߶ȵĸ���
+numScales=c1ScaleSS(end)-1;
 %   last index in scaleSS contains scale index where next band would start, i.e., 1 after highest scale!!
 numSimpleFilters=floor(length(fSiz)/numScales); %4������
 % numSimpleFilters=4;
@@ -94,7 +94,7 @@ for iPhase = 1:numPhases
                     s1{iBand}{iScale}{iFilt} = abs(imfilter(stim,sqfilter{iUFilterIndex},'symmetric','same','corr'));
                     
                     if(~INCLUDEBORDERS)
-                        s1{iBand}{iScale}{iFilt} = removeborders(s1{iBand}{iScale}{iFilt},fSiz(iUFilterIndex)); %��face��ݼ�ʱ����ȡC2ʱ������?Ҳ���ǵ��߶ȴ�СΪ21ʱ���?��Ҫԭ���ǣ����ʱ���s1��21*21��unpagimage����ִ�к󷵻�[]
+                        s1{iBand}{iScale}{iFilt} = removeborders(s1{iBand}{iScale}{iFilt},fSiz(iUFilterIndex)); %��face��ݼ�ʱ����ȡC2ʱ������?Ҳ���ǵ��߶ȴ�СΪ21ʱ���?��Ҫԭ���ǣ����ʱ���s1��21*21��unpagimage����ִ�к󷵻�[]
                     end
                     s1{iBand}{iScale}{iFilt} = im2double(s1{iBand}{iScale}{iFilt}) ./ s1Norm{fSiz(iUFilterIndex)}; %�õ�s1��ÿ���߶���ÿ�������˲���ͼ��
                 else %not 100% compatible but 20% faster at least
@@ -148,10 +148,10 @@ for iBand = 1:numScaleBands %�ӵ�һ���߶ȴ�ʼѭ��
     sSS=ceil(c1SpaceSS(iBand)/c1OL);
     clear T;
     for iFilt = 1:numSimpleFilters %�ӵ�һ������ʼѭ��
-        T(:,:,iFilt) = c1{iBand}(1:sSS:end,1:sSS:end,iFilt); %�������õ�ÿ���������Ӧ
-        %     T(:,:,iFilt) = c1{iBand}(1:2:end,1:2:end,iFilt); %�������õ�ÿ���������Ӧ
+        T(:,:,iFilt) = c1{iBand}(1:sSS:end,1:sSS:end,iFilt); %�������õ�ÿ����������?        %     T(:,:,iFilt) = c1{iBand}(1:2:end,1:2:end,iFilt); %�������õ�ÿ����������?    end
     end
-    c1{iBand} = T;
+        c1{iBand} = T;
+    
 end
 
 

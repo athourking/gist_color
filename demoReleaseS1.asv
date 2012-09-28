@@ -8,7 +8,7 @@
 %% ---------------------------------------------------------------
 %                                Parameters
 % -------------------------------------------------------------------------
-imgDir = 'C:\cognitive science\scene perception\gist\Modeling the shape of the scene a holistic representation of the spatial envelope\images\spatial_envelope_256x256_static_8outdoorcategories';
+imgDir = '...\images\spatial_envelope_256x256_static_8outdoorcategories';
 categories = {'tallbuilding','insidecity','street','highway','coast','opencountry','mountain','forest'};
 imageSize = 256; 
 numberBlocks = 4;
@@ -36,7 +36,7 @@ Nscenes = length(scenes);
 [fSiz,filters,c1OL,numSimpleFilters] = init_gabor_phase(rot, RF_siz, Div,numPhases);
 Nfeatures = length(rot)*(length(c1ScaleSS)-1)*numberBlocks^2;
 
-C = zeros([Nscenes 1]);
+
 F = zeros([Nscenes Nfeatures]);
 
 for n = 1:Nscenes
@@ -48,10 +48,8 @@ for n = 1:Nscenes
     end
     
     output = prefilt(img, fc_prefilt);
-    F(n,:) = computeGist(output, filters, fSiz, c1SpaceSS, c1ScaleSS, c1OL,numPhases);
+    F(n,:) = computeS1Gist(output, filters, fSiz, c1SpaceSS, c1ScaleSS, c1OL,numPhases);
 
-% %     scenes{n}(1)= lower(scenes{n}(1)); 
-% %     C(n) = strmatch(scenes{n}(1), categories);
 end
 
 
@@ -60,6 +58,6 @@ if ~exist(outDir,'dir')
     mkdir(outDir);
 end
 
-save(fullfile(outDir,sprintf('F.mat')) ,'F','-v7.3');
+save(fullfile(outDir,sprintf('Fs1.mat')) ,'F','-v7.3');
 
 %

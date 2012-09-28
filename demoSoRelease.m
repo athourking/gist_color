@@ -54,7 +54,11 @@ for n = 1:Nscenes
         img = imresize(img, [imageSize imageSize], 'bilinear');
     end
     
-    output = prefilt(double(img), fc_prefilt);
+%     output = prefilt(double(img), fc_prefilt);
+   if max(img(:)) > 1
+        img = double(img) / 255;
+    end
+    output = 2 * double(img) - 1;
     F(n,:) = computeSoGist(output,cfilters, fSiz, c1SpaceSS, ...
         c1ScaleSS,c1OL,numPhases,numChannels);
 end
@@ -66,6 +70,6 @@ if ~exist(outDir,'dir')
     mkdir(outDir);
 end
 
-save(fullfile(outDir,sprintf('Fso_nosample2.mat')) ,'F','-v7.3');
+save(fullfile(outDir,sprintf('Fso_rectify.mat')) ,'F','-v7.3');
 exit
 %

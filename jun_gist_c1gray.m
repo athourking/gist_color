@@ -11,17 +11,8 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % % Parameters
-% addpath('/users/jz7/data/ColorGist/gist/svm571');
-addpath('/users/jz7/data/ColorGist/gist/gaussian_opponent_model_for_colorTuning');
-addpath('/users/jz7/data/Tuning/The Steerable Pyramid/matlabPyrTools/matlabPyrTools');
-
-% Parameters
-HOMEIMAGES = '/users/jz7/data/ColorGist/images/spatial_envelope_256x256_static_8outdoorcategories';
-HOMEANNOTATIONS = '/users/jz7/data/ColorGist/annotations/spatial_envelope_256x256_static_8outdoorcategories';
-% DB2 = LMdatabase(HOMEANNOTATIONS);
+imgDir = '/gpfs/home/tserre/work/jzhang/database/Gist/spatial_envelope_256x256_static_8outdoorcategories';
 categories = {'tallbuilding','insidecity','street','highway','coast','opencountry','mountain','forest'};
-% HOMEIMAGES = 'E:\paper and code\Modeling the shape of the scene a holistic representation of the spatial envelope\images2'
-% categories = {'aisle','boston','car','face','kitchen','meeting','office','static_indoor'};
 imageSize = 256; 
 % imageSize = 140; 
 % orientationsPerScale = [8 8 8 8];
@@ -34,8 +25,8 @@ Nclasses = length(categories);
 
 numPhases = 2;
 % % rot = [90 -45 0 45];
-% rot =  0:22.5:157.5;
-rot = [0 90];
+rot =  0:22.5:157.5;
+% rot = [0 90];
 % c1ScaleSS = [1:2:18];
 c1ScaleSS = [1:2:8];
 % % c1ScaleSS = [1 1.4 2 3.5 4 7];
@@ -51,7 +42,7 @@ Div       = div(1:3:end);
 % % 
 % % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Compute global features
-scenes = dir(fullfile(HOMEIMAGES, '*.jpg'));
+scenes = dir(fullfile(imgDir, '*.jpg'));
 scenes = {scenes(:).name};
 Nscenes = length(scenes);
 % 
@@ -70,44 +61,30 @@ Nfeatures = length(rot)*(length(c1ScaleSS)-1)*numberBlocks^2;
 % % 
 % Loop: Compute global features for all scenes
 F = zeros([Nscenes Nfeatures]);
-C = zeros([Nscenes 1]);
+% C = zeros([Nscenes 1]);
 
-outDir = sprintf('/gpfs/data/jz7/ColorGist/results/%i_train/C1',NtrainingPerClass);
-if ~exist(outDir)
-    mkdir(outDir);
-end
-height = 200;
 
 for n = 1:Nscenes
     disp([n Nscenes]);
-    outFile = fullfile(outDir,sprintf('F_gray_%i_orients_%i_scene.mat', ...
-          length(rot),  n));
-        
-    if exist(outFile,'file'),
-        F = load(outFile);
-        F = F.F;  
-        
-    else
-    
-    img = imread(fullfile(HOMEIMAGES, scenes{n}));
+
+    img = imread(fullfile(imgDir, scenes{n}));
     img = mean(img,3);%����ɫͼ���Ϊ�Ҷ�ͼ�񣬵���ֵ�ձ����255��������ʾ�󲿷�Ϊ��ɫ
-        [mm,nn,unused] = size(img);
-
-     ratio = height/min(mm,nn);
-        img = imresize(img,ratio,'bilinear'); 
         
-    output = prefilt(double(img), fc_prefilt);
-    g = gaborC1_phase(output, filters, fSiz, c1SpaceSS, c1ScaleSS, c1OL,numPhases);
+    output = prefilt(img, fc_prefilt);
+    F(n,:) = gaborC1_phase(output, filters, fSiz, c1SpaceSS, c1ScaleSS, c1OL,numPhases);
 
-    F(n,:) = g;
-    
-    save(fullfile(outDir,sprintf('F_gray_%i_orients_%i_scene.mat', ...
-            length(rot),n)) ,'F','-v7.3');
-    end
 end
 
 
 
+outDir = sprintf('../results/0920');
+if ~exist(outDir,'dir')
+    mkdir(outDir);
+end
+    
+
+
+save(fullfile(outDir,sprintf('Fc1.mat')) ,'F','-v7.3');
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % tmpDir = sprintf('../results/%i_train',NtrainingPerClass);
 % train = load(fullfile(tmpDir,sprintf('train_%i_train.mat', ...
@@ -127,8 +104,7 @@ end
 %     netc = svm(Nfeatures, 'rbf', 0.003, 100);
 %     netc = svmtrain(netc, F(train,:), 2*(C(train)==c)-1, [], 1);
 % 
-%     [Y, scores(c,:)] = svmfwd(netc, F(test,:)); %��c���Ӧ�Ĳ��Լ�Ԥ�����ͷ���
-% 
+%     [Y, scores(c,:)] = svmfwd(netc, F(test,:)); %��c���Ӧ�Ĳ��Լ�Ԥ�����ͷ���?% 
 % end
 % for k = 1:length(test)
 %     [foo, ctest_hat(k)] = max(scores(:,k));
